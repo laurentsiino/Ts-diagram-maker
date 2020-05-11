@@ -4,15 +4,13 @@
 	<meta charset="utf-8" />
 	<title>Ts diagram</title>
 	<style>
+		/*les bordures font-face un decalage en x et en y*/
 		#canvas {
-			border: 4px solid black;
+			border: 1px solid black;
 		}
 
 		#duplicatecanvas {
-			border: 4px solid black;
-		}
-		.bordergreen {
-			border: 3px solid green;
+			border: 1px solid black;
 		}
 	</style>
 </head>
@@ -26,11 +24,23 @@
 		<canvas id="duplicatecanvas">
 		</canvas>
 	<div>-->
+	<div style="font-size:20px; position:absolute; top: 0px; align-items: end">
+		<input type="checkbox" id="numbers" name="numbers"
+			   checked>
+		<label for="numbers">Show state numbers</label>
+	<!--<div>
+		<form style="font-size:15px; position:absolute; top: 0px; align-items: end">
+		<p> State numbers </p>
+		<input type="radio" id="adjust" name="adjust" value="adjust">
+		<label for="adjust">Show state number</label><br>
+		<input type="radio" id="free" name="adjust" value="adjust">
+		<label for="free">Next point is not on the saturation line</label><br>
+		</form>-->
+	</div>
 	<div id="maincontainer"
 		 style="display:grid">
 		<div id="canvascontainer"
-			 style="position:relative;display:inline-grid"
-			 class="bordergreen">
+			 style="position:relative;display:inline-grid">
 			<canvas id="canvas"
 					style="position: absolute; left: 10px; top: 20px; z-index: 0;">
 			</canvas>
@@ -39,23 +49,25 @@
 			</canvas>
 		</div>
 		<div id="variation"
-			 style="border: 1px solid red; height: 300px">
-			<form style="font-size:15px; position:absolute; top: 1000;">
+			 style=" display: inline-block">
+			<form style="font-size:15px; position:absolute; top: 1000" ;>
 				<p>State change</p>
-				<input type="radio" id="constptchange" name="change" value="Constant-pressure temperature change">
+				<input type="radio" id="constptchange" name="change" value="Constant-pressure temperature change" checked>
 				<label for="Constant-pressure temperature change">Constant-pressure temperature change</label><br>
 				<input type="radio" id="isentchange" name="change" value="Isentropic temperature change">
-				<label for="Isentropic temperature change">Isentropic temperature change</label><br>
+				<label for="Isentropic temperature change">Isentropic temperature change (turbine/pump)</label><br>
 				<input type="radio" id="mixture" name="change" value="Mixture change">
 				<label for="Mixture">Mixture change</label><br>
 				<input type="radio" id="isenpchange" name="change" value="Isenthalpic Pressure change">
-				<label for="Isenthalpic Pressure change">Isenthalpic Pressure change</label>
+				<label for="Isenthalpic Pressure change">Isenthalpic Pressure change (valve)</label>
 			</form>
-		</div>
-	</div>
-	<script src=canvas.js>
+			<div>
 
-	</script>
+
+			</div>
+			<script src=canvas.js>
+
+			</script>
 
 </body>
 </html>

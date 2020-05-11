@@ -258,6 +258,23 @@
 	duplicatecanvas.addEventListener("mousedown", clique);
 	duplicatecanvas.addEventListener("mouseup", relache);
 	duplicatecanvas.addEventListener("mousemove", deplace);
+	document.getElementById('export').onclick = function () {
+		//alert("Image exported");
+		duplicatectx.closePath();
+		premier = true;
+		highlight = false;
+		duplicatectx.clearRect(0, 0, duplicatecanvas.width, duplicatecanvas.height);
+		duplicatectx.drawImage(copie, 0, 0);
+		ctx.drawImage(duplicatecanvas, 0, 0);
+		var finished = document.getElementById("canvas");
+		var image = canvas.toDataURL("image/png");
+		document.write('<img src="' + image + '"/>');
+	};
+	document.getElementById('stop').onclick = function () {
+		duplicatectx.closePath();
+		premier = true;
+		highlight = false;
+	};
 	
 
 

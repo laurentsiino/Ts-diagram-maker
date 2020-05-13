@@ -13,7 +13,7 @@
 	canvascontainer.style.width = (canvas.width+20) + "px" ;
 	canvascontainer.style.height = (canvas.height+30) + "px";
 
-	variation.style.left = canvas.width + "px";
+	variation.style.left = (canvas.width+40) + "px";
 
 	//ctx.fillStyle = "white";
 	//ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -77,6 +77,7 @@
 	var premier = true;
 	var highlight = true;
 	var counter = 1;
+	var enpause = false;
 	
 	
 	//settings des lignes
@@ -89,6 +90,15 @@
 	copie.width = duplicatecanvas.width;
 	copie.height = duplicatecanvas.height;
 	copiectx.drawImage(duplicatecanvas, 0, 0);
+
+	//render
+	var render = document.createElement('canvas');
+	var renderctx = copie.getContext('2d');
+	render.width = duplicatecanvas.width;
+	render.height = duplicatecanvas.height;
+	renderctx.drawImage(duplicatecanvas, 0, 0);
+
+
 	
 	function localisation(e) {
 		return [e.clientX - positionrect.left, e.clientY - positionrect.top + (window.scrollY/1)];
@@ -96,7 +106,8 @@
 
 	function clique(e) {
 		highlight = false;
-		//duplicatecanvas = copie;
+
+		duplicatectx.clearRect(0, 0, duplicatecanvas.width, duplicatecanvas.height);
 		duplicatectx.drawImage(copie, 0, 0);
 		if (premier) {
 			//on prend en note le premier point
@@ -107,6 +118,7 @@
 				duplicatectx.font = "20px Arial";
 				duplicatectx.fillText(counter.toString(), point[0] - 15, point[1] - 5);
 				counter = counter + 1;
+				copiectx.clearRect(0, 0, copie.width, copie.height);
 				copiectx.drawImage(duplicatecanvas, 0, 0);
 			}
 			
@@ -123,6 +135,7 @@
 					nouveaupoint = localisation(e);
 					duplicatectx.beginPath();
 					duplicatectx.moveTo(point[0], point[1]);
+					
 					//duplicatectx.lineTo(nouveaupoint[0], nouveaupoint[1]);
 					if (nouveaupoint[0] >= point[0]) {
 						duplicatectx.quadraticCurveTo(0.4 * point[0] + 0.6 * nouveaupoint[0], 0.6 * point[1] + 0.4 * nouveaupoint[1], nouveaupoint[0], nouveaupoint[1]);
@@ -157,15 +170,28 @@
 					nouveaupoint = localisation(e)
 					duplicatectx.beginPath();
 					duplicatectx.moveTo(point[0], point[1]);
-					duplicatectx.lineTo(nouveaupoint[0], nouveaupoint[1]);
+					//duplicatectx.lineTo(nouveaupoint[0], nouveaupoint[1]);
+					if (nouveaupoint[0] > point[0]) {
+						duplicatectx.quadraticCurveTo(0.6 * point[0] + 0.4 * nouveaupoint[0], 0.4 * point[1] + 0.6 * nouveaupoint[1], nouveaupoint[0], nouveaupoint[1]);
+					}
+					else if (nouveaupoint[0] < point[0]) {
+						duplicatectx.quadraticCurveTo(0.4 * point[0] + 0.6 * nouveaupoint[0], 0.4 * nouveaupoint[1] + 0.6 * point[1], nouveaupoint[0], nouveaupoint[1]);
+					}
+					duplicatectx.stroke();
 					duplicatectx.stroke();
 					point = nouveaupoint;
 				}
 		
 		}
-		if (document.getElementById('numbers').checked) {
-			duplicatectx.font = "20px Arial";
-			duplicatectx.fillText(counter.toString(), nouveaupoint[0] - 15, nouveaupoint[1] - 5);
+		if (document.getElementById('numbers').checked && enpause == false) {
+			if (document.getElementById('constptchange').checked && nouveaupoint[0] > canvas.width / 2) {
+				duplicatectx.font = "20px Arial";
+				duplicatectx.fillText(counter.toString(), nouveaupoint[0]-2, nouveaupoint[1]-10);
+			}
+			else {
+				duplicatectx.font = "20px Arial";
+				duplicatectx.fillText(counter.toString(), nouveaupoint[0] - 15, nouveaupoint[1] - 5);
+			}
 			counter = counter + 1;
 			
 
@@ -177,6 +203,8 @@
 			//point = nouveaupoint;
         }
 		//copie = duplicatecanvas;
+		enpause = false;
+		copiectx.clearRect(0, 0, copie.width, copie.height);
 		copiectx.drawImage(duplicatecanvas, 0, 0);
 		
 
@@ -242,13 +270,26 @@
 				nouveaupoint = localisation(e)
 				duplicatectx.beginPath();
 				duplicatectx.moveTo(point[0], point[1]);
-				duplicatectx.lineTo(nouveaupoint[0], nouveaupoint[1]);
+
+				//duplicatectx.lineTo(nouveaupoint[0], nouveaupoint[1]);
+				if (nouveaupoint[0] > point[0]) {
+					duplicatectx.quadraticCurveTo(0.6 * point[0] + 0.4 * nouveaupoint[0], 0.4 * point[1] + 0.6 * nouveaupoint[1], nouveaupoint[0], nouveaupoint[1]);
+				}
+				else if (nouveaupoint[0] < point[0]) {
+					duplicatectx.quadraticCurveTo(0.4 * point[0] + 0.6 * nouveaupoint[0], 0.4 * nouveaupoint[1] + 0.6 * point[1], nouveaupoint[0], nouveaupoint[1]);
+				}
 				duplicatectx.stroke();
 				
 			}
 			if (document.getElementById('numbers').checked) {
-				duplicatectx.font = "20px Arial";
-				duplicatectx.fillText(counter.toString(), nouveaupoint[0] - 15, nouveaupoint[1] - 5);
+				if (document.getElementById('constptchange').checked && nouveaupoint[0] > canvas.width/2) {
+					duplicatectx.font = "20px Arial";
+					duplicatectx.fillText(counter.toString(), nouveaupoint[0]-2, nouveaupoint[1] - 10);
+				}
+				else {
+					duplicatectx.font = "20px Arial";
+					duplicatectx.fillText(counter.toString(), nouveaupoint[0] - 15, nouveaupoint[1] - 5);
+				}
 				
 			}
 		}
@@ -264,7 +305,7 @@
 		premier = true;
 		highlight = false;
 		duplicatectx.clearRect(0, 0, duplicatecanvas.width, duplicatecanvas.height);
-		duplicatectx.drawImage(copie, 0, 0);
+		duplicatectx.drawImage(copie, 0, 0); 
 		ctx.drawImage(duplicatecanvas, 0, 0);
 		var finished = document.getElementById("canvas");
 		var image = canvas.toDataURL("image/png");
@@ -273,7 +314,8 @@
 	document.getElementById('stop').onclick = function () {
 		duplicatectx.closePath();
 		premier = true;
-		highlight = false;
+		//highlight = false;
+		enpause = true;
 	};
 	
 

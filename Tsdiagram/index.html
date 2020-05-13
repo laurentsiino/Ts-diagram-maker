@@ -7,69 +7,68 @@
 		/*les bordures font-face un decalage en x et en y*/
 		#canvas {
 			border: 1px solid black;
+			box-sizing: border-box
 		}
 
 		#duplicatecanvas {
 			border: 1px solid black;
+			box-sizing: border-box
 		}
+
+
+
+		
 	</style>
 </head>
-<body style="background-color: rgb(173, 173, 173);>
+<body style="background-color: rgb(173, 173, 173)">
 	<div>
-		<h1 font-family:georgia,garamond,serif;font-size:70px;text-align:center;"> T-s diagram maker </h1>
+		<h1 style="font-family:'HP Simplified';font-size:70px;text-align:center; top:0px;margin-top: 10px;margin-bottom:10px"> T-s diagram maker </h1>
 	</div>
-	<!--<div style="text-align:center">
-		<canvas id="canvas">
-		</canvas>
-		<canvas id="duplicatecanvas">
-		</canvas>
-	<div>-->
-	<div style="font-size:20px; position:absolute; top: 0px; align-items: end">
-		<input type="checkbox" id="numbers" name="numbers"
-			   checked>
-		<label for="numbers">Show state numbers</label>
-		<button id="export" type="button">Export to image</button>
-		<button id="stop" type="button">Stop drawing</button>
-		<!--<div>
-	<form style="font-size:15px; position:absolute; top: 0px; align-items: end">
-	<p> State numbers </p>
-	<input type="radio" id="adjust" name="adjust" value="adjust">
-	<label for="adjust">Show state number</label><br>
-	<input type="radio" id="free" name="adjust" value="adjust">
-	<label for="free">Next point is not on the saturation line</label><br>
-	</form>-->
-	</div>
+	
+<!--remettre ici-->
+
 	<div id="maincontainer"
 		 style="display:grid">
 		<div id="canvascontainer"
-			 style="position:relative;display:inline-grid">
+			 style="position:relative">
 			<canvas id="canvas"
-					style="position: absolute; left: 10px; top: 20px; z-index: 0;">
+					style="position: absolute; left: 10px; top: 0px; z-index: 0;">
 			</canvas>
 			<canvas id="duplicatecanvas"
-					style="position: absolute; left: 10px; top:20px; z-index: 1;">
+					style="position: absolute; left: 10px; top:0px; z-index: 1;">
 			</canvas>
 		</div>
+		
 		<div id="variation"
-			 style=" display: inline-block">
-			<form style="font-size:15px; position:absolute; top: 1000" ;>
-				<p>State change</p>
-				<input type="radio" id="constptchange" name="change" value="Constant-pressure temperature change" checked>
-				<label for="Constant-pressure temperature change">Constant-pressure temperature change</label><br>
-				<input type="radio" id="isentchange" name="change" value="Isentropic temperature change">
-				<label for="Isentropic temperature change">Isentropic temperature change (turbine/pump)</label><br>
-				<input type="radio" id="mixture" name="change" value="Mixture change">
-				<label for="Mixture">Mixture change</label><br>
-				<input type="radio" id="isenpchange" name="change" value="Isenthalpic Pressure change">
-				<label for="Isenthalpic Pressure change">Isenthalpic Pressure change (valve)</label>
-			</form>
-			<div>
+			 style=" position: absolute; display:inline-grid">
+			<div style="font-size:20px; position:relative;">
+				<input type="checkbox" id="numbers" name="numbers"
+					   checked>
+				<label for="numbers">Write state numbers</label>
 
 
+				<form style="font-size:15px">
+					<p>State change</p>
+					<input type="radio" id="constptchange" name="change" value="Constant-pressure temperature change" checked>
+					<label for="Constant-pressure temperature change">Constant-pressure temperature change</label><br>
+					<input type="radio" id="isentchange" name="change" value="Isentropic temperature change">
+					<label for="Isentropic temperature change">Isentropic temperature change (turbine/pump)</label><br>
+					<input type="radio" id="mixture" name="change" value="Mixture change">
+					<label for="Mixture">Mixture change</label><br>
+					<input type="radio" id="isenpchange" name="change" value="Isenthalpic Pressure change">
+					<label for="Isenthalpic Pressure change">Isenthalpic Pressure change (valve)</label>
+				</form>
+				<br>
+				<button id="export" type="button">Export to image</button>
+				<button id="stop" type="button">Stop drawing</button>
 			</div>
-			<script src=canvas.js>
+		</div>
 
-			</script>
+
+	</div>
+	<script src=canvas.js>
+
+	</script>
 
 </body>
 </html>

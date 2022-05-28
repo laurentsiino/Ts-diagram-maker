@@ -80,7 +80,7 @@ window.addEventListener("load", () => {
 	let sketching = false;
 	var positionrect = duplicatecanvas.getBoundingClientRect();
 	var point;
-	var nouveaupoint=[];
+	var nouveaupoint;
 	var premier = true;
 	var highlight = true;
 	var counter = 1;

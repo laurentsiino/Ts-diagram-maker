@@ -1,9 +1,14 @@
-﻿window.addEventListener("load", () => {
+﻿
+
+
+	
+const duplicatectx = duplicatecanvas.getContext("2d");
+window.addEventListener("load", () => {
 	const canvas = document.querySelector("#canvas");
 	const ctx = canvas.getContext("2d");
 
 	const duplicatecanvas = document.querySelector("#duplicatecanvas");
-	const duplicatectx = duplicatecanvas.getContext("2d");
+	
 	const variation = document.getElementById("variation");
 	const canvascontainer = document.getElementById("canvascontainer");
 	
@@ -18,6 +23,8 @@
 	//ctx.fillStyle = "white";
 	//ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "rgba(1, 1, 1, 150)";
+	
+	
 	ctx.fillRect(canvas.width * 0.1, canvas.height * 0.1, 2, canvas.height * 0.8);
 	ctx.fillRect(canvas.width * 0.1, canvas.height * 0.9, canvas.width * 0.8, 2);
 
@@ -73,7 +80,7 @@
 	let sketching = false;
 	var positionrect = duplicatecanvas.getBoundingClientRect();
 	var point;
-	var nouveaupoint;
+	var nouveaupoint=[];
 	var premier = true;
 	var highlight = true;
 	var counter = 1;
@@ -81,7 +88,8 @@
 	
 	
 	//settings des lignes
-	//duplicatectx.strokeStyle = "rgba(255, 0, 0, 150)";
+	duplicatectx.strokeStyle ="black";
+	
 	duplicatectx.lineWidth = 2;
 	duplicatectx.lineCap = "round";
 	//copiage du duplicate
@@ -115,6 +123,7 @@
 			point = localisation(e);
 			premier = false;
 			if (document.getElementById('numbers').checked) {
+				
 				duplicatectx.font = "20px Arial";
 				duplicatectx.fillText(counter.toString(), point[0] - 15, point[1] - 5);
 				counter = counter + 1;
@@ -183,14 +192,17 @@
 				}
 		
 		}
+		
 		if (document.getElementById('numbers').checked && enpause == false) {
 			if (document.getElementById('constptchange').checked && nouveaupoint[0] > canvas.width / 2) {
+				
 				duplicatectx.font = "20px Arial";
 				duplicatectx.fillText(counter.toString(), nouveaupoint[0]-2, nouveaupoint[1]-10);
 			}
 			else {
 				duplicatectx.font = "20px Arial";
 				duplicatectx.fillText(counter.toString(), nouveaupoint[0] - 15, nouveaupoint[1] - 5);
+				
 			}
 			counter = counter + 1;
 			
@@ -283,7 +295,7 @@
 			}
 			if (document.getElementById('numbers').checked) {
 				if (document.getElementById('constptchange').checked && nouveaupoint[0] > canvas.width/2) {
-					duplicatectx.font = "20px Arial";
+					duplicatectx.font = "20px Arial ";
 					duplicatectx.fillText(counter.toString(), nouveaupoint[0]-2, nouveaupoint[1] - 10);
 				}
 				else {
@@ -325,3 +337,9 @@
 	//resizing
 //window.addEventListener("resize", () => {
 
+// function to change colors
+function change_color() {
+	duplicatectx.fillStyle=document.getElementById("text_color").value;
+	duplicatectx.strokeStyle =document.getElementById("line_color").value;
+	
+}

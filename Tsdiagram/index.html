@@ -57,18 +57,34 @@
 					<label for="Mixture">Mixture change</label><br>
 					<input type="radio" id="isenpchange" name="change" value="Isenthalpic Pressure change">
 					<label for="Isenthalpic Pressure change">Isenthalpic Pressure change (valve)</label>
+					
+					
 				</form>
 				<br>
 				<button id="export" type="button">Export to image</button>
 				<button id="stop" type="button">Stop drawing</button>
+				<br>
+				<br>
+				<label>Color of the lines:</label>
+				<input type="color" id="line_color" >
+				<br>
+				<label>Font color of the numbers:</label>
+				<input type="color" id="text_color" ><br>
+				<button onclick="change_color()">change colors</button>
 			</div>
 		</div>
 
 
 	</div>
+	<!-- <label>Color of the lines:</label>
+	<input type="color" id="line_color" >
+	<br>
+	<label>Font color of the numbers:</label>
+	<input type="color" id="text_color" ><br>
+	<button onclick="change_color()">change colors</button> -->
 	<script src=canvas.js>
 
 	</script>
-
+	
 </body>
 </html>

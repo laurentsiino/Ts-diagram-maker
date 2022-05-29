@@ -1,4 +1,4 @@
-﻿
+
 
 
 	
@@ -126,7 +126,7 @@ window.addEventListener("load", () => {
 				
 				duplicatectx.font = "20px Arial";
 				duplicatectx.fillText(counter.toString(), point[0] - 15, point[1] - 5);
-				//counter = counter + 1;
+				counter = counter + 1;
 				copiectx.clearRect(0, 0, copie.width, copie.height);
 				copiectx.drawImage(duplicatecanvas, 0, 0);
 			}
@@ -341,5 +341,4 @@ window.addEventListener("load", () => {
 function change_color() {
 	duplicatectx.fillStyle=document.getElementById("text_color").value;
 	duplicatectx.strokeStyle =document.getElementById("line_color").value;
-	
 }
